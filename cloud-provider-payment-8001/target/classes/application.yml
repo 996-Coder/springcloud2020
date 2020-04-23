@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: payment-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/cloud
+server:
+  port: 8001
