@@ -6,7 +6,7 @@ spring:
       uri: mongodb://localhost:27017/spring_cloud_2020
 
 server:
-  port: 8001
+  port: 8002
 
 eureka:
   client:

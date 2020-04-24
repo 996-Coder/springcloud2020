@@ -16,13 +16,19 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>cloud-provider-payment-8001</module>
+        <module>cloud-consumer-order-80</module>
+        <module>cloud-common</module>
+        <module>cloud-eureka-server-7001</module>
+        <module>cloud-eureka-server-7002</module>
+        <module>cloud-eureka-server-7003</module>
+        <module>cloud-provider-payment-8002</module>
     </modules>
     <name>cloud2020</name>
     <description>Demo project for Spring Cloud</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <spring.boot.version>>2.2.5.RELEASE</spring.boot.version>
+        <spring.boot.version>2.2.5.RELEASE</spring.boot.version>
         <spring.cloud.version>Hoxton.SR3</spring.cloud.version>
         <spring.cloud.alibaba.version>2.1.0.RELEASE</spring.cloud.alibaba.version>
         <lombok.version>1.16.22</lombok.version>
