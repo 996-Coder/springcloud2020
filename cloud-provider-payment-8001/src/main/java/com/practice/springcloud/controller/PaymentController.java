@@ -21,7 +21,11 @@ public class PaymentController {
     @PostMapping("create")
     public ResponseEntity create(@RequestBody Payment payment) {
         Payment savedPayment = paymentService.insert(payment);
-        return ResponseEntity.ok(savedPayment);
+        if (savedPayment != null){
+            return ResponseEntity.ok(savedPayment);
+        } else {
+            return ResponseEntity.status(500).body(null);
+        }
     }
 
     @DeleteMapping("/id/{id}")
