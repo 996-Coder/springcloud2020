@@ -3,6 +3,6 @@ spring:
     name: payment-service
   data:
     mongodb:
-      uri: mongodb://localhost:27017/cloud
+      uri: mongodb://localhost:27017/spring_cloud_2020
 server:
   port: 8001
