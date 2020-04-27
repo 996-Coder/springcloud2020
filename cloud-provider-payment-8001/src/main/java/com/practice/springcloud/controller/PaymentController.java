@@ -3,11 +3,14 @@ package com.practice.springcloud.controller;
 import com.practice.springcloud.entity.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.practice.springcloud.service.PaymentService;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @RestController
 @RequestMapping("/payment")
@@ -32,7 +35,7 @@ public class PaymentController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@NotEmpty @PathVariable String id) {
         paymentService.deleteById(id);
-        return ResponseEntity.status(200).body("The payment with id: "+id +"has been deleted");
+        return ResponseEntity.status(200).body("The payment with id: " + id + "has been deleted");
     }
 
     @PutMapping("/{id}")
@@ -49,5 +52,17 @@ public class PaymentController {
         Payment foundPayment = paymentService.getById(id);
         System.out.println(port);
         return ResponseEntity.ok(foundPayment);
+    }
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+    @PostMapping("/discovery")
+    public Object getDiscovery() {
+        List<String> instances = discoveryClient.getServices();
+        for (String instance : instances) {
+            System.out.println(instance);
+        }
+        return null;
     }
 }
