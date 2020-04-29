@@ -8,6 +8,8 @@ server:
 eureka:
   instance:
     hostname: eureka7001.com
+  server:
+    enable-self-preservation: false
   client:
     register-with-eureka: false
     fetch-registry: false
