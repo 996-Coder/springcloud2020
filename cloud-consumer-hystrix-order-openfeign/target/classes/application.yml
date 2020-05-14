@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: hystrix-order-service
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: order
+    prefer-ip-address: true
+
+ribbon:
+  # 建立连接后，处理请求的时间
+  ReadTimeout: 5000
+  # 建立连接所用时间，适用于网络正常的情况下，两端建立连接所用时间
+  ConnectTimeout: 5000
+
+# 开启hystrix的支持
+feign:
+  hystrix:
+    enabled: true

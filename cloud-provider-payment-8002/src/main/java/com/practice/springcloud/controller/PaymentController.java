@@ -1,13 +1,16 @@
 package com.practice.springcloud.controller;
 
 import com.practice.springcloud.entity.Payment;
+import com.practice.springcloud.entity.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.practice.springcloud.service.PaymentService;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/payment")
@@ -49,5 +52,12 @@ public class PaymentController {
         Payment foundPayment = paymentService.getById(id);
         System.out.println(port);
         return ResponseEntity.ok(foundPayment);
+    }
+
+    @GetMapping("/openfeign/timeout")
+    public ResponseEntity openFeignTimeout() {
+        ResponseEntity responseEntity = new ResponseEntity(port, HttpStatus.OK);
+        System.out.println(responseEntity.getBody());
+        return responseEntity;
     }
 }

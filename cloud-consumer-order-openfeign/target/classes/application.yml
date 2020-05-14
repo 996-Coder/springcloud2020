@@ -1,7 +1,31 @@
 server:
   port: 8080
 
+spring:
+  application:
+    name: order-service
+
 eureka:
   client:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+# 设置Feign客户端超时时间(Feign的负载均衡就是用ribbon实现的)
+ribbon:
+  # 建立连接后，处理请求的时间
+  ReadTimeout: 5000
+  # 建立连接所用时间，适用于网络正常的情况下，两端建立连接所用时间
+  ConnectTimeout: 5000
+
+# 配置feign全局日志级别为full
+#feign:
+#  client:
+#    config:
+#      default:
+#        loggerLevel: full
+
+logging:
+  level:
+    com.practice.springcloud: debug
+    # feign日志以什么级别监控哪个接口
+    com.practice.springcloud.configuration.FeignConfiguration: debug

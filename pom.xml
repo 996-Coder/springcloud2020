@@ -18,15 +18,18 @@
 
     <modules>
         <module>cloud-common</module>
-        <module>cloud-provider-payment-8001</module>
         <module>cloud-consumer-order-80</module>
         <module>cloud-eureka-server-7001</module>
         <module>cloud-eureka-server-7002</module>
         <module>cloud-eureka-server-7003</module>
+        <module>cloud-provider-hystrix-payment-8001</module>
+        <module>cloud-provider-payment-8001</module>
         <module>cloud-provider-payment-8002</module>
         <module>cloud-consumer-order-replace-ribbon-default-loadbalance</module>
         <module>cloud-consumer-order-customize-RoundRobinRule</module>
         <module>cloud-consumer-order-openfeign</module>
+        <module>groovy-demo</module>
+        <module>cloud-consumer-hystrix-order-openfeign</module>
     </modules>
     <name>cloud2020</name>
     <description>Demo project for Spring Cloud</description>
