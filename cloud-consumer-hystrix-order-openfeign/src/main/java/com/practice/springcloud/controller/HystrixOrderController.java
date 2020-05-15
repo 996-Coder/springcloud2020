@@ -3,7 +3,7 @@ package com.practice.springcloud.controller;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.practice.springcloud.service.HystrixOrderService;
+import com.practice.springcloud.service.HystrixPaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,25 +20,25 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/consumer/hystrix")
-@DefaultProperties(defaultFallback = "globalFallbackMethod", commandProperties = {
-        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000")
-})
+//@DefaultProperties(defaultFallback = "globalFallbackMethod", commandProperties = {
+//        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000")
+//})
 public class HystrixOrderController {
     @Autowired
-    HystrixOrderService hystrixOrderService;
+    HystrixPaymentService hystrixPaymentService;
 
     @GetMapping("/ok/{id}")
     public ResponseEntity paymentOk(@PathVariable String id) {
-        return ResponseEntity.status(200).body(hystrixOrderService.paymentOk(id).getBody());
+        return ResponseEntity.status(200).body(hystrixPaymentService.paymentOk(id).getBody());
     }
 
     @GetMapping("/timeout/{id}")
     @HystrixCommand(fallbackMethod = "paymentTimeoutHandler", commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000")
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
     })
     public ResponseEntity paymentTimeout(@PathVariable String id) {
         log.info("请求进入consumer");
-        return ResponseEntity.status(200).body(hystrixOrderService.paymentTimeout(id).getBody());
+        return ResponseEntity.status(200).body(hystrixPaymentService.paymentTimeout(id).getBody());
     }
 
     public ResponseEntity paymentTimeoutHandler(@PathVariable String id) {
@@ -49,10 +49,11 @@ public class HystrixOrderController {
     @GetMapping("/timeout1/{id}")
     public ResponseEntity paymentTimeout1(@PathVariable String id) {
         int a = 1 / 0;
-        return ResponseEntity.status(200).body(hystrixOrderService.paymentTimeout(id).getBody());
+        return ResponseEntity.status(200).body(hystrixPaymentService.paymentTimeout(id).getBody());
     }
 
-    public ResponseEntity globalFallbackMethod(@PathVariable String id) {
+    // 全局处理的方法不可以携带参数
+    public ResponseEntity globalFallbackMethod() {
         return ResponseEntity.ok("Use global fallback method.");
     }
 }

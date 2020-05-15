@@ -26,4 +26,11 @@ public class PaymentController {
         log.info("请求进入consumer");
         return ResponseEntity.status(200).body(Thread.currentThread().getName() + ", id: " + id + ", " + paymentService.paymentTimeout());
     }
+    @GetMapping("/circuit/{id}")
+    public ResponseEntity paymentCircuitBreaker(@PathVariable String id) {
+        log.info("请求进入consumer");
+        return ResponseEntity.status(200).body(Thread.currentThread().getName() + ", id: " + id + ", " + paymentService.paymentCircuitBreaker(Integer.parseInt(id)));
+    }
+
+
 }

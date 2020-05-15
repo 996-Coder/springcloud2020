@@ -12,7 +12,7 @@ eureka:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
   instance:
-    instance-id: order
+    instance-id: hystrix-order-service
     prefer-ip-address: true
 
 ribbon:
@@ -21,7 +21,7 @@ ribbon:
   # 建立连接所用时间，适用于网络正常的情况下，两端建立连接所用时间
   ConnectTimeout: 5000
 
-# 开启hystrix的支持
+# 用于服务降级，在注解@FeignClient中添加fallbackFactory属性值
 feign:
   hystrix:
     enabled: true

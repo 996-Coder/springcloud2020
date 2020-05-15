@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @desc
  */
 @Service
-@FeignClient(value = "HYSTRIX-PAYMENT-SERVICE")
+@FeignClient(value = "HYSTRIX-PAYMENT-SERVICE", fallback = HystrixPaymentFallbackService.class)
 @RequestMapping("/payment/hystrix")
-public interface HystrixOrderService {
+public interface HystrixPaymentService {
     @GetMapping("/ok/{id}")
     ResponseEntity<String> paymentOk(@PathVariable String id);
 
