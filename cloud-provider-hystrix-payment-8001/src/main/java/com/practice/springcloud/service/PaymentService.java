@@ -24,7 +24,7 @@ public class PaymentService {
     // 服务降级
 
     @HystrixCommand(fallbackMethod = "paymentTimeoutHandler", commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")     // 设置最长等待时间，执行时间超过等待时间就熔断
     })
     public String paymentTimeout() {
         try {
@@ -50,6 +50,7 @@ public class PaymentService {
             @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "20"), // 请求次数
             @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"), // 时间
             @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60") // 失败率阈值
+                                                                // 十秒内20次请求的失败率达到60%就触发熔断
     })
     public String paymentCircuitBreaker(Integer id) {
         if (id < 0) {

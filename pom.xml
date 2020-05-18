@@ -30,6 +30,8 @@
         <module>cloud-consumer-order-openfeign</module>
         <module>groovy-demo</module>
         <module>cloud-consumer-hystrix-order-openfeign</module>
+        <module>cloud-consumer-hystrix-dashboard</module>
+        <module>cloud-gateway</module>
     </modules>
     <name>cloud2020</name>
     <description>Demo project for Spring Cloud</description>
