@@ -1,0 +1,51 @@
+server.port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: payment8001route        # 路由ID，没有固定规则但要求唯一，建议配合服务名
+#          uri: http://localhost:8001  # 提供服务的真实地址
+          uri: lb://PAYMENT-SERVICE     # 根据服务名称进行动态路由，前缀lb代表 Ribbon load-balancing (defined the lb prefix on the destination URI).
+          predicates:
+            - Path=/payment/**
+        - id: payment8001route1       # 路由ID，没有固定规则但要求唯一，建议配合服务名
+#          uri: http://localhost:8001  # 提供服务的真实地址
+          uri: lb://PAYMENT-SERVICE     # 根据服务名称进行动态路由
+          predicates:
+            - After=2020-05-19T08:54:26.570+08:00[Asia/Shanghai]  # 匹配在这个时间点之后发生的请求 java ZonedDateTime
+            - Before=2020-05-19T08:54:26.570+08:00[Asia/Shanghai] # 匹配在这个时间点之前发生的请求
+            - Between=2020-05-19T08:54:26.570+08:00[Asia/Shanghai],2020-05-20T08:54:26.570+08:00[Asia/Shanghai] # 匹配在第一个时间点之后，第二个时间点之前发生的请求This could be useful for maintenance windows.
+            - Cookie=mycookie,mycookievalue  # 匹配携带名为mycookie，值为mycookievalue的cookie的请求 值可以是一个正则表达式
+            #  完全展开的参数设置
+#            - name: Cookie
+#              args:
+#                name: mycookie
+#                regexp: mycookievalue
+            - Header=X-Request-Id, \d+  # 匹配携带名为X-Request-Id，值匹配正则表达式\d+的header的请求
+            - Host=**.somehost.org,**.anotherhost.org # 匹配域名 如www.somehost.org或者beta.somehost.org或者www.anotherhost.org则此路由匹配
+            - Method=GET,POST # 匹配HTTP方法 Get和Post请求可以通过
+            - Path=/payment/openfeign/timeout   # 通过指定路由来匹配
+            - Query=green # 请求携带的参数中有green则可通过
+            - RemoteAddr=192.168.1.1/24 # 通过ip地址来匹配，后面的24是子网掩码
+        # 每组依据权重分配路由，下面的配置会将80%的流量转发到https://weighthigh.org ，20%的流量转发到https://weightlow.org
+        - id: weight_high
+          uri: https://weighthigh.org
+          predicates:
+            - Weight=group1, 8
+        - id: weight_low
+          uri: https://weightlow.org
+          predicates:
+            - Weight=group1, 2
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: cloud-gatewat9527
+    prefer-ip-address: true

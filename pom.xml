@@ -32,6 +32,8 @@
         <module>cloud-consumer-hystrix-order-openfeign</module>
         <module>cloud-consumer-hystrix-dashboard</module>
         <module>cloud-gateway</module>
+        <module>cloud-config-center</module>
+        <module>cloud-config-client-3355</module>
     </modules>
     <name>cloud2020</name>
     <description>Demo project for Spring Cloud</description>
