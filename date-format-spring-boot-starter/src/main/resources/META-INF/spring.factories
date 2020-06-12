@@ -1,0 +1,2 @@
+# 这行代码的意思就是将 DateFormatConfiguration 设置为自动装配类，在 SpringBoot 工程启动时会去扫描 MATE-INF 文件夹的 spring.factories 文件，并加载这个文件中指定的类，启动自动装配功能。
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.practice.springcloud.configuration.DateFormatConfiguration

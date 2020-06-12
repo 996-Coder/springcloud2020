@@ -34,6 +34,10 @@
         <module>cloud-gateway</module>
         <module>cloud-config-center</module>
         <module>cloud-config-client-3355</module>
+        <module>apache-poi-demo</module>
+        <module>date-format-spring-boot-starter</module>
+        <module>date-format-spring-boot-starter-test</module>
+        <module>maven-demo</module>
     </modules>
     <name>cloud2020</name>
     <description>Demo project for Spring Cloud</description>
@@ -60,19 +64,19 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- spring cloud -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <!-- spring-cloud-alibaba -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring-boot-autoconfigure -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
